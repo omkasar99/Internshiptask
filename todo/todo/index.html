@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Todo App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* background-image: url('https://www.transparenttextures.com/patterns/stonewall.png'); */
+            background-size: cover;
+            background-attachment: fixed;
+            color: #0c021c;
+        }
+
+        .todo-container {
+            background-color: rgba(5, 1, 14, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0a536e;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #bb3636;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #01405b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+
+        li {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+8
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #888;
+            background-color: #f4f4f4;
+        }
+
+        li.high-priority {
+            background-color: #053070;
+            border-left: 5px solid #030008;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .filters button {
+            width: 48%;
+            background-color: #312d39;
+            color: #fff;
+            font-size: 1em;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filters button:hover {
+            background-color: #ff9800;
+        }
+
+        .task-count {
+            text-align: center;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        button.remove, .priority, .edit {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        button.remove:hover, .priority:hover, .edit:hover {
+            color: #f44336;
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        .priority {
+            font-size: 0.9em;
+            color: #ff5722;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <h1>Interactive Todo App</h1>
+        <input type="text" id="todo-input" placeholder="Enter your task...">
+        <button id="add-btn"><i class="fas fa-plus icon"></i>Add Task</button>
+        <ul id="todo-list"></ul>
+        
+        <div class="filters">
+            <button id="filter-all">All</button>
+            <button id="filter-active">Active</button>
+            <button id="filter-completed">Completed</button>
+            <button id="clear-all">Clear All</button>
+        </div>
+        
+        <div class="task-count" id="task-count"></div>
+    </div>
+
+    <script>
+        document.getElementById('add-btn').addEventListener('click', addTask);
+        document.getElementById('todo-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') addTask();
+        });
+
+        document.getElementById('filter-all').addEventListener('click', filterTasks);
+        document.getElementById('filter-active').addEventListener('click', filterTasks);
+        document.getElementById('filter-completed').addEventListener('click', filterTasks);
+        document.getElementById('clear-all').addEventListener('click', clearAllTasks);
+
+        let tasks = [];
+
+        function addTask() {
+            const input = document.getElementById('todo-input');
+            const taskText = input.value.trim();
+
+            if (taskText !== '') {
+                const task = {
+                    text: taskText,
+                    completed: false,
+                    highPriority: false
+                };
+
+                tasks.push(task);
+                saveTasks();
+                input.value = '';
+                renderTasks();
+            }
+        }
+
+        function renderTasks() {
+            const ul = document.getElementById('todo-list');
+            ul.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.classList.toggle('completed', task.completed);
+                li.classList.toggle('high-priority', task.highPriority);
+                
+                li.innerHTML = `
+                    <span class="task-text">${task.text}</span>
+                    <button class="edit"><i class="fas fa-edit icon"></i>Edit</button>
+                    <button class="remove"><i class="fas fa-trash-alt icon"></i>Remove</button>
+                    <button class="priority">${task.highPriority ? 'Remove High Priority' : 'Mark High Priority'}</button>
+                `;
+
+                li.querySelector('.edit').addEventListener('click', () => editTask(index));
+                li.querySelector('.remove').addEventListener('click', () => removeTask(index));
+                li.querySelector('.priority').addEventListener('click', () => togglePriority(index));
+
+                li.addEventListener('click', () => toggleCompletion(index));
+
+                ul.appendChild(li);
+            });
+
+            updateTaskCount();
+        }
+
+        function toggleCompletion(index) {
+            tasks[index].completed = !tasks[index].completed;
+            saveTasks();
+            renderTasks();
+        }
+
+        function editTask(index) {
+            const newText = prompt('Edit your task:', tasks[index].text);
+            if (newText) {
+                tasks[index].text = newText;
+                saveTasks();
+                renderTasks();
+            }
+        }
+
+        function removeTask(index) {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        }
+
+        function togglePriority(index) {
+            tasks[index].highPriority = !tasks[index].highPriority;
+            saveTasks();
+            renderTasks();
+        }
+
+        function filterTasks(e) {
+            const filter = e.target.id;
+            let filteredTasks;
+
+            if (filter === 'filter-active') {
+                filteredTasks = tasks.filter(task => !task.completed);
+            } else if (filter === 'filter-completed') {
+                filteredTasks = tasks.filter(task => task.completed);
+            } else {
+                filteredTasks = tasks;
+            }
+
+            const ul = document.getElementById('todo-list');
+            ul.innerHTML = '';
+
+            filteredTasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.classList.toggle('completed', task.completed);
+                li.classList.toggle('high-priority', task.highPriority);
+
+                li.innerHTML = `
+                    <span class="task-text">${task.text}</span>
+                    <button class="edit"><i class="fas fa-edit icon"></i>Edit</button>
+                    <button class="remove"><i class="fas fa-trash-alt icon"></i>Remove</button>
+                    <button class="priority">${task.highPriority ? 'Remove High Priority' : 'Mark High Priority'}</button>
+                `;
+
+                li.querySelector('.edit').addEventListener('click', () => editTask(index));
+                li.querySelector('.remove').addEventListener('click', () => removeTask(index));
+                li.querySelector('.priority').addEventListener('click', () => togglePriority(index));
+
+                li.addEventListener('click', () => toggleCompletion(index));
+
+                ul.appendChild(li);
+            });
+
+            updateTaskCount();
+        }
+
+        function clearAllTasks() {
+            tasks = [];
+            saveTasks();
+            renderTasks();
+        }
+
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+            if (savedTasks) {
+                tasks = savedTasks;
+                renderTasks();
+            }
+        }
+
+        function updateTaskCount() {
+            const taskCount = tasks.filter(task => !task.completed).length;
+            document.getElementById('task-count').textContent = `Tasks remaining: ${taskCount}`;
+        }
+
+        window.onload = loadTasks;
+    </script>
+</body>
+</html>
