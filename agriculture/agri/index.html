@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        <section id="home" class="hero-section" style="background-image: url('sandy-zebua-a7n65pmnJ4Q-unsplash.jpg'); background-size: cover; background-position: center;">
+    <div class="container text-center">
+        <h1 class="display-3">Cultivating a Greener Tomorrow</h1>
+        <p class="lead">Explore our wide range of agriculture products, services, and resources.</p>
+        <a href="#products" class="btn btn-primary">Shop Now</a>
+    </div>
+</section>
+
+}
+
+        }
+        .product-card {
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .service-section {
+            background-color: #f7f7f7;
+            padding: 50px 0;
+        }
+        .footer-section {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer-section .social-icons i {
+            margin: 10px;
+        }
+        .category-card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 10px;
+        }
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+        .blog-post-card, .testimonial-card {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Agriculture Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#careers">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3">Cultivating a Greener Tomorrow</h1>
+            <p class="lead">Explore our wide range of agriculture products, services, and resources.</p>
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="products" class="container py-5">
+        <h2 class="display-5 text-center">Featured Products</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="Product 1">
+                    <h3>Product 1</h3>
+                    <p>This is a great product description.</p>
+                    <button class="btn btn-outline-primary">View Details</button>
+                </div>
+            </div>
+            <!-- Repeat for other products... -->
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="service-section">
+        <div class="container">
+            <h2 class="display-5 text-center">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="category-card">
+                        <h3>Organic Farming Training</h3>
+                        <p>Learn how to implement organic farming techniques.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card">
+                        <h3>Delivery Services</h3>
+                        <p>Fast and reliable delivery of agricultural products.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="category-card">
+                        <h3>Soil Testing</h3>
+                        <p>Get accurate soil testing for optimal crop growth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="container py-5">
+        <h2 class="display-5 text-center">Latest Blog Posts</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="blog-post-card">
+                    <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="Blog 1">
+                    <h3>Blog Post 1</h3>
+                    <p>This is a short excerpt from the blog post.</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+            <!-- Repeat for other blog posts... -->
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="container py-5">
+        <h2 class="display-5 text-center">Photo Gallery</h2>
+        <div class="row">
+            <!-- Add 12 images here -->
+            <div class="col-md-4">
+                <img src="https://via.placeholder.com/300x200" class="img-fluid" alt="Gallery Image">
+            </div>
+            <!-- Repeat for more images... -->
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="container py-5">
+        <h2 class="display-5 text-center">Careers</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="category-card">
+                    <h3>Job Position 1</h3>
+                    <p>Job description for position 1.</p>
+                    <button class="btn btn-primary">Apply Now</button>
+                </div>
+            </div>
+            <!-- Repeat for other job positions... -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container py-5">
+        <h2 class="display-5 text-center">Get in Touch</h2>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer-section">
+        <div class="container">
+            <p>&copy; 2024 Agriculture Website. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#" class="text-light"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="text-light"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="text-light"><i class="fa fa-instagram"></i></a>
+            </div>
+            <form>
+                <input type="email" class="form-control" placeholder="Subscribe to our Newsletter" required>
+                <button type="submit" class="btn btn-primary mt-2">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+#products {
+    background-image: url('images/sandy-zebua-a7n65pmnJ4Q-unsplash.jpg'); /* Your custom image */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 60px 0;
+}
